@@ -1,0 +1,6 @@
+.slider__content__bg {
+    --xCut: 0.1vw;
+    --yCut: 0.1vw;
+
+    clip-path: polygon(0 0, 100% 0, 100% 100%, var(--xCut) 100%, 0 calc(100% - var(--yCut))) !important;
+}

@@ -1,5 +1,6 @@
 export const useSmoke = () => {
-    const canvas = document.getElementsByTagName('canvas')[0];
+    const block = document.querySelector('.solution');
+    const canvas = block.querySelector('canvas');
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
 
@@ -1120,32 +1121,27 @@ export const useSmoke = () => {
         }
     });
 
-    window.addEventListener('mouseup', () => {
-        // pointers[0].down = false;
-    });
+    // window.addEventListener('mouseup', () => {
+    //     pointers[0].down = false;
+    // });
 
-    window.addEventListener('touchend', e => {
-        const touches = e.changedTouches;
-        for (let i = 0; i < touches.length; i++)
-            for (let j = 0; j < pointers.length; j++)
-                if (touches[i].identifier == pointers[j].id)
-                    pointers[j].down = false;
-    });
+    // window.addEventListener('touchend', e => {
+    //     const touches = e.changedTouches;
+    //     for (let i = 0; i < touches.length; i++)
+    //         for (let j = 0; j < pointers.length; j++)
+    //             if (touches[i].identifier == pointers[j].id)
+    //                 pointers[j].down = false;
+    // });
 
-    window.addEventListener('keydown', e => {
-        if (e.code === 'KeyP')
-            config.PAUSED = !config.PAUSED;
-        if (e.key === ' ')
-            splatStack.push(parseInt(Math.random() * 20) + 5);
-    });
+    // window.addEventListener('keydown', e => {
+    //     if (e.code === 'KeyP')
+    //         config.PAUSED = !config.PAUSED;
+    //     if (e.key === ' ')
+    //         splatStack.push(parseInt(Math.random() * 20) + 5);
+    // });
 
     function generateColor (isGray = false) {
         let c = isGray ? HSVtoRGB(180, 0.0, 0.5) : HSVtoRGB(Math.random(), 1.0, 1.0);
-        // const c = {
-        //     r: 211,
-        //     g: 211,
-        //     b: 211
-        // };
         c.r *= 0.15;
         c.g *= 0.15;
         c.b *= 0.15;

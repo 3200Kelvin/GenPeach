@@ -3,6 +3,7 @@ export const COLORS = {
     WHITE: 'var(--white)',
     ORANGE: 'var(--orange)',
     WHITE_15: 'var(--white-15)',
+    TRANSPARENT: 'transparent',
 };
 
 export const BORDER_RADIUS = 'var(--border-radius)';

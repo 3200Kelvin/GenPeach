@@ -1,0 +1,1 @@
+html{overflow:auto}.scroll-blocked{overflow:hidden}.scroll-blocked body{height:100vh;overflow:hidden}@media screen and (min-width: 1000px){.scroll-blocked{padding-right:var(--scroll-bar-width, 0)}.scroll-blocked [compensate-scrollbar]{padding-right:var(--scroll-bar-width, 0)}}

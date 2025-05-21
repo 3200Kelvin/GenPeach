@@ -1,0 +1,1 @@
+(()=>{"use strict";(()=>{if("true"===sessionStorage.getItem("preloader"))return;const e=document.createElement("style");e.textContent=".preloader { display: block; }",document.head.appendChild(e),window.scrollY=0,window.scrollTo(0,0),document.documentElement.classList.add("scroll-blocked")})()})();

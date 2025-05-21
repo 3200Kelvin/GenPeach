@@ -1,3 +1,5 @@
+import './style.scss';
+
 export const useAccordeon = () => {
     const accordeons = document.querySelectorAll('.accordeon');
 

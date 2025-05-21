@@ -9,6 +9,7 @@ export const useMenu = () => {
 function useMobileMenu(menuBlock) {
     const menu = menuBlock.querySelector('.menu__mobile');
     const button = menu.querySelector('.burger-btn');
+    const contactButton = menu.querySelector('.button');
     const dropdown = menu.querySelector('.menu__mobile__dropdown');
     const container = dropdown.querySelector('.menu__mobile__container');
     const content = dropdown.querySelector('.menu__mobile__content');
@@ -16,9 +17,14 @@ function useMobileMenu(menuBlock) {
 
     let isOpened = false;
 
-    button.addEventListener('click', () => isOpened ? closeMenu() : openMenu());
+    button.addEventListener('click', openMenu);
+    document.documentElement.addEventListener('click', closeMenu);
 
-    function openMenu() {
+    function openMenu(event) {
+        if (isOpened) {
+            return;
+        }
+        event.stopPropagation();
         isOpened = true;
 
         gsap.timeline()
@@ -27,6 +33,7 @@ function useMobileMenu(menuBlock) {
                 gsap.to(menu, { backgroundColor: COLORS.ORANGE, borderBottomLeftRadius: 0, borderBottomRightRadius: 0 });
                 gsap.to(content, { backgroundColor: COLORS.ORANGE });
                 gsap.to(corner, { color: COLORS.ORANGE });
+                gsap.to(contactButton, { backgroundColor: COLORS.WHITE, color: COLORS.ORANGE });
             })
             .to(container, { transform: 'translateY(-100%)' })
             .to(dropdown, { display: 'block' })
@@ -42,6 +49,7 @@ function useMobileMenu(menuBlock) {
                 gsap.to(menu, { backgroundColor: COLORS.WHITE_15, borderBottomLeftRadius: BORDER_RADIUS, borderBottomRightRadius: BORDER_RADIUS });
                 gsap.to(content, { backgroundColor: COLORS.WHITE_15 });
                 gsap.to(corner, { color: COLORS.WHITE_15 });
+                gsap.to(contactButton, { backgroundColor: COLORS.TRANSPARENT, color: COLORS.WHITE });
             })
             .to(container, { transform: 'translateY(-100%)', duration: 0.4 })
             .to(dropdown, { display: 'none' });

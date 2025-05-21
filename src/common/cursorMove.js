@@ -1,6 +1,6 @@
 import { getRaf, getSetVariable, isTouchscreen } from "./helpers";
 
-export const useCursorMove = (cursor, elements, { x: startX = 0, y: startY = 0, isSmooth = true } = {}) => {
+export const useCursorMove = (cursor, elements, { x: startX = 0, y: startY = 0, isSmooth = true, isFixed = false } = {}) => {
     if (isTouchscreen) {
         return () => {};
     }
@@ -17,6 +17,8 @@ export const useCursorMove = (cursor, elements, { x: startX = 0, y: startY = 0, 
         },
     });
 
+    const getPosition = getGetPosition();
+
     const setX = isSmooth ? getSetVariable(positionProxy, 'x') : (val) => positionProxy.x = val;
     const setY = isSmooth ? getSetVariable(positionProxy, 'y') : (val) => positionProxy.y = val;;
     const moveRaf = getRaf();
@@ -30,8 +32,9 @@ export const useCursorMove = (cursor, elements, { x: startX = 0, y: startY = 0, 
     return { setTarget };
 
     function onMouseEnter(event) {
-        const { pageX, pageY, target } = event;
-        setTarget(pageX, pageY);
+        const { target } = event;
+        const { x, y } = getPosition(event);
+        setTarget(x, y);
         cursor.classList.add('entered');
         
         target.addEventListener('mousemove', onMouseMove);
@@ -39,13 +42,14 @@ export const useCursorMove = (cursor, elements, { x: startX = 0, y: startY = 0, 
     }
 
     function onMouseMove(event) {
-        const { pageX, pageY } = event;
-        setTarget(pageX, pageY);
+        const { x, y } = getPosition(event);
+        setTarget(x, y);
     }
 
     function omMouseLeave(event) {
-        const { pageX, pageY, target } = event;
-        setTarget(pageX, pageY);
+        const { target } = event;
+        const { x, y } = getPosition(event);
+        setTarget(x, y);
         cursor.classList.remove('entered');
         
         target.removeEventListener('mousemove', onMouseMove);
@@ -62,5 +66,9 @@ export const useCursorMove = (cursor, elements, { x: startX = 0, y: startY = 0, 
     function moveTip() {
         const { x, y } = position;
         cursor.style.setProperty('--transform', `translate(${x}px, ${y}px)`);
+    }
+
+    function getGetPosition() {
+        return isFixed ? ({ clientX, clientY }) => ({ x: clientX, y: clientY }) : ({ pageX, pageY }) => ({ x: pageX, y: pageY });
     }
 };

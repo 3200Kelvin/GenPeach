@@ -1,0 +1,19 @@
+html {
+    overflow: auto;
+}
+.scroll-blocked {
+    overflow: hidden;
+
+    body {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    @media screen and (min-width: 1000px) {
+        padding-right: var(--scroll-bar-width, 0);
+
+        [compensate-scrollbar] {
+            padding-right: var(--scroll-bar-width, 0);
+        }
+    }
+}

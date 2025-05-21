@@ -7,6 +7,7 @@ export const useUnblur = () => {
 
     function initHeading(heading) {
         const highlight = heading.querySelector('.highlighted');
+        const isManual = heading.dataset.trigger === 'manual';
 
         if (highlight) {
             setTimeout(() => {
@@ -15,7 +16,7 @@ export const useUnblur = () => {
         }
 
         const split = SplitText.create(heading, {
-            type: "chars",
+            type: "lines, chars",
         });
 
         gsap.to(split.chars, {
@@ -24,12 +25,14 @@ export const useUnblur = () => {
             filter: 'blur(10px)',
         });
 
-        gsap.timeline({
+        const timelineParams = isManual ? {} : {
             scrollTrigger: {
                 trigger: heading,
                 start: 'top 85%',
             }
-        })
+        };
+
+        const animate = () => gsap.timeline(timelineParams)
             .to(split.chars, {
                 transform: 'scale(1)',
                 opacity: 1,
@@ -42,5 +45,11 @@ export const useUnblur = () => {
                     highlight.classList.add('highlighted--shown');
                 }
             });
+
+        heading.appear = animate;
+
+        if (!isManual) {
+            animate();
+        }
     }
 };

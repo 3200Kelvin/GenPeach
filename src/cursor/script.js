@@ -9,9 +9,9 @@ export const useHeroCursor = () => {
     }
 
     const hero = document.querySelector('.hero');
-    const cursor = hero.querySelector('.cursor');
+    const cursor = document.querySelector('.cursor');
 
-    const { setTarget } = useCursorMove(cursor, hero, { x: window.innerWidth / 2, y: window.innerHeight / 2, isSmooth: false });
+    const { setTarget } = useCursorMove(cursor, hero, { x: window.innerWidth / 2, y: window.innerHeight / 2, isSmooth: false, isFixed: true });
 
     setTarget(window.innerWidth / 2, window.innerHeight / 2);
 };

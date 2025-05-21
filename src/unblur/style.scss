@@ -8,8 +8,8 @@ h1, h2, h3 {
             left: -1%;
             width: 102%;
             height: 100%;
-            background: var(--red);
-            z-index: -1;
+            background: var(--orange);
+            z-index: 0;
             transform-origin: left;
             transform: scaleX(0);
         }

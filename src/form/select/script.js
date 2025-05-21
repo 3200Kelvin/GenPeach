@@ -1,7 +1,7 @@
 import './style.scss';
 
 export const useSelectWidth = () => {
-    const selects = document.querySelectorAll('form select');
+    const selects = document.querySelectorAll('.form__content--desktop select');
     if (!selects.length) {
         return;
     }

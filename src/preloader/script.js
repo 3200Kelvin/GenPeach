@@ -126,7 +126,7 @@ export const usePreloader = () => {
     }
 
     function showHeroElements() {
-        heroTitle.animate();
+        heroTitle.appear();
         gsap.to(cursor, { display: 'block' });
         gsap.to(menu, { transform: 'translateY(0%)', duration: 0.7 });
         gsap.to(heroCaption, { opacity: 1, duration: 0.7 });

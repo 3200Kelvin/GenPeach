@@ -4,11 +4,25 @@ export const useSolutionsSlider = () => {
     const slider = document.querySelector('.slider');
     const entriesContainer = slider.querySelector('.slider__content__entries');
     const entries = entriesContainer.querySelectorAll('.slider__content__entry');
-    const images = slider.querySelectorAll('.slider__image');
+    const imagesContainer = slider.querySelector('.slider__images');
+    const imageElement = imagesContainer.querySelector('.slider__image');
     const dotsContainer = slider.querySelector('.slider__content__dots')
     const dot = dotsContainer.querySelector('.slider__content__dot');
     const dots = [dot];
     const [previousBtn, nextBtn] = slider.querySelectorAll('.slider__content__button');
+
+    let images = [];
+    const imageElementClone = imageElement.cloneNode();
+    imageElement.remove();
+    entries.forEach((entry, index) => {
+        const img = entry.querySelector('img');
+        const image = imageElementClone.cloneNode();
+        image.src = img.src;
+        image.srcset = img.srcset;
+        images.push(image);
+    });
+
+    imagesContainer.append(...images);
 
     const totalSlides = entries.length;
     const totalSections = totalSlides + 1;
@@ -43,10 +57,13 @@ export const useSolutionsSlider = () => {
     nextBtn.addEventListener('click', () => changeSlide());
 
     function changeSlide(direction = 1) {
-        const scrollDistance = direction * slider.offsetHeight / totalSections;
+        const { top, height } = slider.getBoundingClientRect();
+        const targetIndex = current + direction;
+        const targetY = window.scrollY + top + targetIndex * height / totalSections;
+        // const scrollDistance = direction * slider.offsetHeight / totalSections;
 
         window.scrollTo({
-            top: window.scrollY + scrollDistance,
+            top: targetY,
         });
     }
 

@@ -154,7 +154,7 @@ export const usePreloader = () => {
 
     function hideHeroElements() {
         gsap.to(cursor, { display: 'none' });
-        gsap.to(menu, { transform: 'translateY(-100%)' });
+        gsap.to(menu, { transform: 'translateY(-125%)' });
         gsap.to(heroCaption, { opacity: 0 });
         gsap.to(heroWeights, { opacity: 0 });
     }
@@ -182,8 +182,7 @@ export const usePreloader = () => {
             }, { once: true });
         });
 
-        video1.load();
-        video2.load();
+        preloadVideos();
 
         return Promise.all([p1, p2]);
     }

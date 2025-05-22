@@ -1,5 +1,10 @@
-import { getIsPreloaded, setIsPreloaded } from "./initial";
 import { unblockScroll } from "../common/scroll";
+
+const STORAGE_KEY = 'preloader';
+
+export const getIsPreloaded = () => sessionStorage.getItem(STORAGE_KEY) === 'true';
+
+export const setIsPreloaded = () => sessionStorage.setItem(STORAGE_KEY, true);
 
 export const PRELOADER_PROGRESS_AMOUNT = {
     SCRIPTS: 20,
@@ -54,36 +59,65 @@ export const usePreloader = () => {
     }
 
     function usePreloaderFunctionality() {
-        window.scrollY = 0;
-        window.scrollTo(0, 0);
         hideHeroElements();
 
         if (video1.networkState === 2 && video2.networkState === 2) {
-            waitForVideos().then(() => onContentReady());
+            waitForVideos().then(() => onVideosPreloaded());
         } else {
             onPartLoaded(PRELOADER_PROGRESS_AMOUNT.SKIP)
                 .add(() => {
                     button.addEventListener('click', () => {
                         button.firstElementChild.textContent = 'Wait a sec...';
-                        preloadVideos();
                         waitForVideos().then(() => onContentReady());
+                        preloadVideos();
                     }, { once: true });
                 })
                 .add(showButton());
         }
     }
 
-    function useSkipFunctionality() {
-        video1.remove();
-        video2.play();
-        if (heroTitle.appear) {
-            heroTitle.appear();
-        } else {
-            heroTitle.removeAttribute('data-trigger');
-        }
+    function checkPlaybackAvailability() {
+        return new Promise((res) => {
+            video1.play()
+                .then(() => {
+                    video1.pause();
+                    res(true);
+                })
+                .catch(() => res(false));
+        });
     }
 
-    function onContentReady() {
+    function useSkipFunctionality() {
+        video2.play()
+            .then(() => {
+                video1.remove();
+                onPartLoaded(PRELOADER_PROGRESS_AMOUNT.SKIP)
+                    .add(() => {
+                        removePreloader();
+                        showHeroElements();
+                        unblockScroll();
+                    });
+            })
+            .catch(() => {
+                usePreloaderFunctionality();
+            });
+    }
+
+    async function onVideosPreloaded() {
+        checkPlaybackAvailability().then((isAvailable) => {
+            if (isAvailable) {
+                onContentReady();
+            } else {
+                button.addEventListener('click', () => {
+                    button.firstElementChild.textContent = 'Wait a sec...';
+                    onContentReady();
+                }, { once: true });
+                showButton();
+            }
+        });
+    }
+
+    async function onContentReady() {
         setTimeout(() => {
             removePreloader();
             startSequence();

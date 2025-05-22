@@ -61,7 +61,7 @@ export const usePreloader = () => {
     function usePreloaderFunctionality() {
         hideHeroElements();
 
-        if (false && video1.networkState === 2 && video2.networkState === 2) {
+        if (video1.networkState === 2 && video2.networkState === 2) {
             waitForVideos().then(() => onVideosPreloaded());
         } else {
             onPartLoaded(PRELOADER_PROGRESS_AMOUNT.SKIP)
@@ -181,6 +181,9 @@ export const usePreloader = () => {
                 res();
             }, { once: true });
         });
+
+        video1.load();
+        video2.load();
 
         return Promise.all([p1, p2]);
     }

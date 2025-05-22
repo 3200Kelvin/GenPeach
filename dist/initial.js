@@ -1,1 +1,1 @@
-(()=>{"use strict";(()=>{const e=document.createElement("style");e.textContent=".preloader { display: block; }",document.head.appendChild(e),document.documentElement.classList.add("scroll-blocked")})()})();
+(()=>{"use strict";(()=>{const e=document.createElement("style");e.textContent=".preloader { display: block; }",document.head.appendChild(e),((e=!1)=>{document.documentElement.classList.add("scroll-blocked"),e&&document.documentElement.classList.add("scroll-blocked--reset")})(!("true"===sessionStorage.getItem("preloader")))})()})();

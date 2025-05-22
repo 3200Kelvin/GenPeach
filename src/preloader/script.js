@@ -1,10 +1,5 @@
 import { unblockScroll } from "../common/scroll";
-
-const STORAGE_KEY = 'preloader';
-
-export const getIsPreloaded = () => sessionStorage.getItem(STORAGE_KEY) === 'true';
-
-export const setIsPreloaded = () => sessionStorage.setItem(STORAGE_KEY, true);
+import { getIsPreloaded, setIsPreloaded } from "./initial";
 
 export const PRELOADER_PROGRESS_AMOUNT = {
     SCRIPTS: 20,

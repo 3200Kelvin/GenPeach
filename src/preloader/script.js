@@ -61,7 +61,7 @@ export const usePreloader = () => {
     function usePreloaderFunctionality() {
         hideHeroElements();
 
-        if (video1.networkState === 2 && video2.networkState === 2) {
+        if (false && video1.networkState === 2 && video2.networkState === 2) {
             waitForVideos().then(() => onVideosPreloaded());
         } else {
             onPartLoaded(PRELOADER_PROGRESS_AMOUNT.SKIP)

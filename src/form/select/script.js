@@ -1,10 +1,15 @@
 import './style.scss';
 
-export const useSelectWidth = () => {
-    const selects = document.querySelectorAll('.form__content--desktop select');
+export const useSelectWidth = (form) => {
+    const selects = form.querySelectorAll('.form__content--desktop select');
     if (!selects.length) {
         return;
     }
+
+    const allSelects = form.querySelectorAll('select');
+    allSelects.forEach((select) => {
+        select.classList.add('select-field-styles');
+    });
 
     const helperElement = getHelper();
 

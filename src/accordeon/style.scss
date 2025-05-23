@@ -3,7 +3,8 @@
         background-color: transparent;
 
         &:hover {
-            background-color: var(--orange);
+            background-color: var(--orange) !important;
+            opacity: 1 !important;
         }
     }
 }

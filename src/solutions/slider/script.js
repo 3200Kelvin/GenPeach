@@ -46,8 +46,7 @@ export const useSolutionsSlider = () => {
         end: "bottom bottom",
         scrub: true,
         onUpdate: (self) => {
-            const progress = self.progress;
-            const currentIndex = Math.floor(progress * totalSections);
+            const currentIndex = Math.floor(self.progress * (totalSections - 1));
 
             setActive(currentIndex);
         }
@@ -60,7 +59,6 @@ export const useSolutionsSlider = () => {
         const { top, height } = slider.getBoundingClientRect();
         const targetIndex = current + direction;
         const targetY = window.scrollY + top + targetIndex * height / totalSections;
-        // const scrollDistance = direction * slider.offsetHeight / totalSections;
 
         window.scrollTo({
             top: targetY,

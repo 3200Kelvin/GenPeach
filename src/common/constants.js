@@ -3,6 +3,7 @@ export const COLORS = {
     WHITE: 'var(--white)',
     ORANGE: 'var(--orange)',
     WHITE_15: 'var(--white-15)',
+    WHITE_70: 'var(--white-70)',
     TRANSPARENT: 'transparent',
 };
 

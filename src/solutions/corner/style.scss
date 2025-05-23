@@ -1,6 +1,15 @@
 .slider__content__bg {
-    --xCut: 0.1vw;
-    --yCut: 0.1vw;
+    --percentage: 5%;
+
+    @media screen and (max-width: 767px) {
+        --percentage: 10%;
+    }
+
+    --x-proportion: 1;
+    --y-proportion: 1;
+
+    --xCut: calc(var(--percentage) * var(--x-proportion));
+    --yCut: calc(var(--percentage) * var(--y-proportion));
 
     clip-path: polygon(0 0, 100% 0, 100% 100%, var(--xCut) 100%, 0 calc(100% - var(--yCut))) !important;
 }

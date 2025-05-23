@@ -845,12 +845,11 @@ export const useSmoke = () => {
         // if (splatStack.length > 0)
         //     multipleSplats(splatStack.pop());
 
-        for (let i = 0; i < pointers.length; i++) {
-            const p = pointers[i];
-            if (p.moved) {
-                splat(p.x, p.y, p.dx, p.dy, p.color);
-                p.moved = false;
-            }
+        const p = pointers[0];
+        if (p.moved) {
+            console.log(p.x, p.y);
+            splat(p.x, p.y, p.dx, p.dy, p.color);
+            p.moved = false;
         }
 
         if (!config.COLORFUL)
@@ -859,10 +858,8 @@ export const useSmoke = () => {
         if (lastColorChangeTime + 100 < Date.now())
         {
             lastColorChangeTime = Date.now();
-            for (let i = 0; i < pointers.length; i++) {
-                const p = pointers[i];
-                p.color = generateColor(true);
-            }
+            const p = pointers[0];
+            p.color = generateColor(true);
         }
     }
 
@@ -1081,64 +1078,28 @@ export const useSmoke = () => {
     }
 
     canvas.addEventListener('mousemove', e => {
-        pointers[0].moved = pointers[0].down;
-        pointers[0].dx = (e.offsetX - pointers[0].x) * 5.0;
-        pointers[0].dy = (e.offsetY - pointers[0].y) * 5.0;
-        pointers[0].x = e.offsetX;
-        pointers[0].y = e.offsetY;
+        const pointer = pointers[0];
+
+        pointer.moved = pointer.down;
+        pointer.dx = (e.offsetX - pointer.x) * 5.0;
+        pointer.dy = (e.offsetY - pointer.y) * 5.0;
+        pointer.x = e.offsetX;
+        pointer.y = e.offsetY;
     });
 
     canvas.addEventListener('touchmove', e => {
-        e.preventDefault();
         const touches = e.targetTouches;
-        for (let i = 0; i < touches.length; i++) {
-            let pointer = pointers[i];
-            pointer.moved = pointer.down;
-            pointer.dx = (touches[i].pageX - pointer.x) * 8.0;
-            pointer.dy = (touches[i].pageY - pointer.y) * 8.0;
-            pointer.x = touches[i].pageX;
-            pointer.y = touches[i].pageY;
-        }
+        const pointer = pointers[0];
+        const touch = touches[0];
+        pointer.moved = pointer.down;
+        pointer.dx = (touch.clientX - pointer.x) * 8.0;
+        pointer.dy = (touch.clientY - pointer.y) * 8.0;
+        pointer.x = touch.clientX;
+        pointer.y = touch.clientY;
     }, false);
 
-    // canvas.addEventListener('mousedown', () => {
-        pointers[0].down = true;
-        pointers[0].color = generateColor();
-    // });
-
-    canvas.addEventListener('touchstart', e => {
-        e.preventDefault();
-        const touches = e.targetTouches;
-        for (let i = 0; i < touches.length; i++) {
-            if (i >= pointers.length)
-                pointers.push(new pointerPrototype());
-
-            pointers[i].id = touches[i].identifier;
-            pointers[i].down = true;
-            pointers[i].x = touches[i].pageX;
-            pointers[i].y = touches[i].pageY;
-            pointers[i].color = generateColor();
-        }
-    });
-
-    // window.addEventListener('mouseup', () => {
-    //     pointers[0].down = false;
-    // });
-
-    // window.addEventListener('touchend', e => {
-    //     const touches = e.changedTouches;
-    //     for (let i = 0; i < touches.length; i++)
-    //         for (let j = 0; j < pointers.length; j++)
-    //             if (touches[i].identifier == pointers[j].id)
-    //                 pointers[j].down = false;
-    // });
-
-    // window.addEventListener('keydown', e => {
-    //     if (e.code === 'KeyP')
-    //         config.PAUSED = !config.PAUSED;
-    //     if (e.key === ' ')
-    //         splatStack.push(parseInt(Math.random() * 20) + 5);
-    // });
+    pointers[0].down = true;
+    pointers[0].color = generateColor();
 
     function generateColor (isGray = false) {
         let c = isGray ? HSVtoRGB(180, 0.0, 0.5) : HSVtoRGB(Math.random(), 1.0, 1.0);

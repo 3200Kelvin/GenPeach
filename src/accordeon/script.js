@@ -18,7 +18,7 @@ export const useAccordeon = () => {
             button.addEventListener('keydown', (event) => handleKeyDown(event, index));
 
             gsap.timeline()
-                .to(button, { opacity: 0.6, backgroundColor: 'transparent', clearProps: 'all' })
+                .to(button, { opacity: 0.3, backgroundColor: 'transparent' })
                 .to(icon, { opacity: 1 })
                 .to(body, { height: 0 })
                 .to(content, { display: 'none' });
@@ -74,7 +74,7 @@ export const useAccordeon = () => {
             const { button, body, content, icon } = entry;
 
             gsap.timeline()
-                .to(button, { opacity: 0.6, backgroundColor: 'transparent', clearProps: 'all' })
+                .to(button, { opacity: 0.3, backgroundColor: 'transparent' })
                 .to(icon, { opacity: 1 })
                 .to(body, { height: 0, duration: 0.4 })
                 .to(content, { display: 'none' });

@@ -847,7 +847,6 @@ export const useSmoke = () => {
 
         const p = pointers[0];
         if (p.moved) {
-            console.log(p.x, p.y);
             splat(p.x, p.y, p.dx, p.dy, p.color);
             p.moved = false;
         }

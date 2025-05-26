@@ -3,7 +3,9 @@ import './style.scss';
 export const useUnblur = () => {
     const headings = document.querySelectorAll('[data-animation="unblur-letters"]');
 
-    headings.forEach(initHeading);
+    document.fonts.ready.then(() => {
+        headings.forEach(initHeading);
+    });
 
     function initHeading(heading) {
         const highlight = heading.querySelector('.highlighted');

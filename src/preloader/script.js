@@ -149,7 +149,7 @@ export const usePreloader = () => {
 
     function hideHeroElements() {
         gsap.to(cursor, { display: 'none' });
-        gsap.to(menu, { transform: 'translateY(-125%)' });
+        gsap.to(menu, { transform: 'translateY(-150%)' });
         gsap.to(heroCaption, { opacity: 0 });
         gsap.to(heroWeights, { opacity: 0 });
     }

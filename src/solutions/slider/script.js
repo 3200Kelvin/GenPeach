@@ -27,6 +27,8 @@ export const useSolutionsSlider = () => {
     const totalSlides = entries.length;
     const totalSections = totalSlides + 1;
 
+    slider.style.setProperty('--num-steps', totalSlides);
+
     const BLUR_STRENGTH = 15;
     const BLUR_TIME = 0.4;
     const FADE_TIME = 0.2;

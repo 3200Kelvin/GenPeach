@@ -116,7 +116,7 @@ export const usePreloader = () => {
         setTimeout(() => {
             removePreloader();
             startSequence();
-        }, 500);
+        }, 1000);
     }
 
     function removePreloader() {

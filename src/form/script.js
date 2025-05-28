@@ -1,5 +1,5 @@
 import { useSelectWidth } from "./select/script";
-import { useFormFill } from "./fill/script";
+// import { useFormFill } from "./fill/script";
 import { useIndustryField } from "./industry/script";
 
 export const useForm = () => {
@@ -10,6 +10,6 @@ export const useForm = () => {
     }
 
     useSelectWidth(form);
-    useFormFill(form);
+    // useFormFill(form);
     useIndustryField(form);
 };

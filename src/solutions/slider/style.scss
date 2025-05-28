@@ -1,4 +1,13 @@
 .slider {
+    --step-height: 100vh;
+    --num-steps: 1;
+
+    @media screen and (max-width: 991px) {
+        --step-height: 70vh;
+    }
+
+    height: calc(var(--step-height) * var(--num-steps));
+
     &__image,
     &__content__entry {
         display: none;

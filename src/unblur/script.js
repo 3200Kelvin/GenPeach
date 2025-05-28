@@ -10,6 +10,7 @@ export const useUnblur = () => {
     function initHeading(heading) {
         const highlight = heading.querySelector('.highlighted');
         const isManual = heading.dataset.trigger === 'manual';
+        const triggerTop = heading.dataset.triggerTop || '85%';
 
         if (highlight) {
             setTimeout(() => {
@@ -30,7 +31,7 @@ export const useUnblur = () => {
         const timelineParams = isManual ? {} : {
             scrollTrigger: {
                 trigger: heading,
-                start: 'top 85%',
+                start: `top ${triggerTop}`,
             }
         };
 

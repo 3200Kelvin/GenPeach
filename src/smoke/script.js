@@ -1100,8 +1100,8 @@ export const useSmoke = () => {
     pointers[0].down = true;
     pointers[0].color = generateColor();
 
-    function generateColor (isGray = false) {
-        let c = isGray ? HSVtoRGB(180, 0.0, 0.5) : HSVtoRGB(Math.random(), 1.0, 1.0);
+    function generateColor (isConst = false) {
+        let c = isConst ? { r: 1, g: 0.3, b: 0.24 } : HSVtoRGB(Math.random(), 1.0, 1.0);
         c.r *= 0.15;
         c.g *= 0.15;
         c.b *= 0.15;

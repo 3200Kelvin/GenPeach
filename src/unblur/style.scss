@@ -7,22 +7,23 @@ h1, h2, h3 {
             top: 0;
             left: -1%;
             width: 102%;
-            height: 100%;
+            height: 86%;
             background: var(--orange);
             z-index: 0;
-            transform-origin: left;
-            transform: scaleX(0);
+            opacity: 0;
+            filter: blur(10px);
         }
 
         &--transition {
             &::before {
-                transition: transform 0.5s ease;
+                transition: opacity 0.5s, filter 0.5s;
             }
         }
 
         &--shown {
             &::before {
-                transform: scaleX(1);
+                opacity: 1;
+                filter: blur(0px);
             }
         }
     }

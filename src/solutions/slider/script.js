@@ -41,6 +41,7 @@ export const useSolutionsSlider = () => {
     addDots();
     showInitial(0);
     let current = 0;
+    let timelines = [];
 
     ScrollTrigger.create({
         trigger: slider,
@@ -105,7 +106,9 @@ export const useSolutionsSlider = () => {
     }
 
     function changeSlides(oldIndex, newIndex) {
-        gsap.timeline()
+        timelines.forEach((timeline) => timeline.progress(1));
+
+        const contentTimeline = gsap.timeline()
             .to(entries[newIndex], { display: 'block', position: 'absolute', opacity: 0 })
             .to(entries[oldIndex], { opacity: 0, duration: TOTAL_TIME / 2 })
             .to(entries[oldIndex], { position: 'absolute' })
@@ -118,7 +121,7 @@ export const useSolutionsSlider = () => {
             .to(entries[newIndex], { opacity: 1, duration: TOTAL_TIME / 2 })
             .to(entries[oldIndex], { display: 'none' });
 
-        gsap.timeline()
+        const imageTimeline = gsap.timeline()
             .to(images[newIndex], { display: 'block', opacity: 0, filter: `blur(${BLUR_STRENGTH}px)` })
             .to(images[oldIndex], { filter: `blur(${BLUR_STRENGTH}px)`, duration: BLUR_TIME })
             .add(() => {
@@ -129,5 +132,7 @@ export const useSolutionsSlider = () => {
 
         gsap.to(dots[newIndex], { opacity: DOT_OPACITY.ACTIVE, duration: TOTAL_TIME });
         gsap.to(dots[oldIndex], { opacity: DOT_OPACITY.DEFAULT, duration: TOTAL_TIME });
+
+        timelines.push(contentTimeline, imageTimeline);
     }
 };

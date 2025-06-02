@@ -37,7 +37,8 @@ function useMobileMenu(menuBlock) {
             })
             .to(container, { transform: 'translateY(-100%)' })
             .to(dropdown, { display: 'block' })
-            .to(container, { transform: 'translateY(0%)', duration: 0.4 });
+            .to(container, { transform: 'translateY(0%)', duration: 0.4 })
+            .to(dropdown, { transform: 'translateY(-1px)' });
     }
 
     function closeMenu() {
@@ -51,6 +52,7 @@ function useMobileMenu(menuBlock) {
                 gsap.to(corner, { color: COLORS.WHITE_15 });
                 gsap.to(contactButton, { backgroundColor: COLORS.TRANSPARENT, color: COLORS.WHITE });
             })
+            .to(dropdown, { transform: 'translateY(0px)' })
             .to(container, { transform: 'translateY(-100%)', duration: 0.4 })
             .to(dropdown, { display: 'none' });
     }

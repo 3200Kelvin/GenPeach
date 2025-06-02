@@ -1,8 +1,10 @@
-.solution__contact__card {
-    &:hover {
-        .solution__contact__card__icon {
-            color: var(--white);
-            background-color: var(--orange);
+@media (hover: hover) {
+    .solution__contact__card {
+        &:hover {
+            .solution__contact__card__icon {
+                color: var(--white);
+                background-color: var(--orange);
+            }
         }
     }
 }

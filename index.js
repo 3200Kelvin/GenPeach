@@ -8,6 +8,7 @@ import { useSolutions } from "./src/solutions/script";
 import { useAccordeon } from "./src/accordeon/script";
 import { useVopyValue } from "./src/copyValue/script";
 import { useForm } from "./src/form/script";
+import { useAutoplayVideos } from "./src/videos/script";
 
 import './src/style.scss';
 
@@ -20,5 +21,6 @@ useSolutions();
 useAccordeon();
 useForm();
 useVopyValue();
+useAutoplayVideos();
 
 window.setPreloaderState(PRELOADER_PROGRESS_AMOUNT.SCRIPTS);

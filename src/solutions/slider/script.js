@@ -30,9 +30,10 @@ export const useSolutionsSlider = () => {
     slider.style.setProperty('--num-steps', totalSlides);
 
     const BLUR_STRENGTH = 15;
-    const BLUR_TIME = 0.4;
-    const FADE_TIME = 0.2;
-    const TOTAL_TIME = BLUR_TIME * 2 + FADE_TIME;
+    // const BLUR_TIME = 0.4;
+    // const FADE_TIME = 0.2;
+    // const TOTAL_TIME = BLUR_TIME * 2 + FADE_TIME;
+    const TOTAL_TIME = 0.6;
     const DOT_OPACITY = {
         DEFAULT: 0.15,
         ACTIVE: 0.8,
@@ -121,14 +122,19 @@ export const useSolutionsSlider = () => {
             .to(entries[newIndex], { opacity: 1, duration: TOTAL_TIME / 2 })
             .to(entries[oldIndex], { display: 'none' });
 
+        // const imageTimeline = gsap.timeline()
+        //     .to(images[newIndex], { display: 'block', opacity: 0, filter: `blur(${BLUR_STRENGTH}px)` })
+        //     .to(images[oldIndex], { filter: `blur(${BLUR_STRENGTH}px)`, duration: BLUR_TIME })
+        //     .add(() => {
+        //         gsap.to(images[newIndex], { opacity: 1, duration: FADE_TIME });
+        //         return gsap.to(images[oldIndex], { opacity: 0, duration: FADE_TIME });
+        //     })
+        //     .to(images[newIndex], { filter: 'blur(0px)', duration: BLUR_TIME });
+
         const imageTimeline = gsap.timeline()
-            .to(images[newIndex], { display: 'block', opacity: 0, filter: `blur(${BLUR_STRENGTH}px)` })
-            .to(images[oldIndex], { filter: `blur(${BLUR_STRENGTH}px)`, duration: BLUR_TIME })
-            .add(() => {
-                gsap.to(images[newIndex], { opacity: 1, duration: FADE_TIME });
-                return gsap.to(images[oldIndex], { opacity: 0, duration: FADE_TIME });
-            })
-            .to(images[newIndex], { filter: 'blur(0px)', duration: BLUR_TIME });
+            .to(images[newIndex], { display: 'block', opacity: 1, zIndex: 0 })
+            .to(images[oldIndex], { opacity: 0, duration: TOTAL_TIME })
+            .to(images[newIndex], { zIndex: 1 });
 
         gsap.to(dots[newIndex], { opacity: DOT_OPACITY.ACTIVE, duration: TOTAL_TIME });
         gsap.to(dots[oldIndex], { opacity: DOT_OPACITY.DEFAULT, duration: TOTAL_TIME });

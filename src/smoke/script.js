@@ -1,8 +1,9 @@
-export const useSmoke = () => {
-    const block = document.querySelector('.solution');
-    const canvas = block.querySelector('canvas');
+export const useSmoke = ({ trigger = null, xProperty = 'offsetX', yProperty = 'offsetY', splatRadius = 0.2 } = {}) => {
+    const canvas = document.querySelector('.smoke-sim canvas');
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
+
+    const moseEventListener = trigger || canvas;
 
     let config = {
         SIM_RESOLUTION: 128,
@@ -12,7 +13,7 @@ export const useSmoke = () => {
         PRESSURE_DISSIPATION: 0.8,
         PRESSURE_ITERATIONS: 20,
         CURL: 5,
-        SPLAT_RADIUS: 0.2,
+        SPLAT_RADIUS: splatRadius,
         SHADING: true,
         COLORFUL: true,
         PAUSED: false,
@@ -1076,17 +1077,20 @@ export const useSmoke = () => {
         }
     }
 
-    canvas.addEventListener('mousemove', e => {
+    moseEventListener.addEventListener('mousemove', (e) => {
         const pointer = pointers[0];
 
+        const x = e[xProperty];
+        const y = e[yProperty];
+
         pointer.moved = pointer.down;
-        pointer.dx = (e.offsetX - pointer.x) * 5.0;
-        pointer.dy = (e.offsetY - pointer.y) * 5.0;
-        pointer.x = e.offsetX;
-        pointer.y = e.offsetY;
+        pointer.dx = (x - pointer.x) * 5.0;
+        pointer.dy = (y - pointer.y) * 5.0;
+        pointer.x = x;
+        pointer.y = y;
     });
 
-    canvas.addEventListener('touchmove', e => {
+    moseEventListener.addEventListener('touchmove', e => {
         const touches = e.targetTouches;
         const pointer = pointers[0];
         const touch = touches[0];

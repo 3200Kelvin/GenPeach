@@ -8,7 +8,7 @@ export const PRELOADER_PROGRESS_AMOUNT = {
     SKIP: 100,
 };
 
-export const usePreloader = () => {
+export const usePreloader = (skipAll = false) => {
     const isPreloaded = getIsPreloaded();
     const preloader = document.querySelector('.preloader');
     const line = preloader.querySelector('.preloader__line');
@@ -25,6 +25,16 @@ export const usePreloader = () => {
     let loaded = 0;
 
     window.setPreloaderState = onPartLoaded;
+
+    if (skipAll) {
+        onPartLoaded(PRELOADER_PROGRESS_AMOUNT.SKIP)
+            .add(() => {
+                removePreloader();
+                showHeroElements();
+                unblockScroll();
+            });
+        return;
+    }
 
     const video1 = hero.querySelector('.hero__video--first video');
     const video2 = hero.querySelector('.hero__video--second video');

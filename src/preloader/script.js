@@ -26,6 +26,26 @@ export const usePreloader = (skipAll = false) => {
 
     window.setPreloaderState = onPartLoaded;
 
+    // const videoContainers = [
+    //     hero.querySelector('.hero__video[data-order="1"]'),
+    //     hero.querySelector('.hero__video[data-order="2"]'),
+    // ];
+
+    // const [video1, video2] = [...videoContainers].map((container) => {
+    //     const video = container.querySelector('video');
+    //     // const source = video.querySelector('source');
+    //     // const src = container.dataset.src;
+    //     // source.src = src;
+    //     return video;
+    // });
+
+    const video1 = hero.querySelector('.hero__video--first video');
+    const video2 = hero.querySelector('.hero__video--second video');
+
+    if (!video1 || !video2) {
+        return removePreloader();
+    }
+
     if (skipAll) {
         onPartLoaded(PRELOADER_PROGRESS_AMOUNT.SKIP)
             .add(() => {
@@ -35,9 +55,6 @@ export const usePreloader = (skipAll = false) => {
             });
         return;
     }
-
-    const video1 = hero.querySelector('.hero__video--first video');
-    const video2 = hero.querySelector('.hero__video--second video');
 
     if (!video1 || !video2) {
         return removePreloader();

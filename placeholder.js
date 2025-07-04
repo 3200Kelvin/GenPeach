@@ -16,7 +16,7 @@ gsap.defaults({
 useMenu();
 useHeroCursor();
 useUnblur();
-useSmoke({ trigger: window, xProperty: 'clientX', yProperty: 'clientY', splatRadius: 0.5 });
+useSmoke({ trigger: window, xProperty: 'clientX', yProperty: 'clientY' });
 useForm();
 useVopyValue();
 usePreloader(true);

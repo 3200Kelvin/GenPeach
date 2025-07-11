@@ -1,6 +1,6 @@
 import { useSelectWidth } from "./select/script";
-// import { useFormFill } from "./fill/script";
 import { useIndustryField } from "./industry/script";
+import { setFormApiSelector } from "./apiSelection/script";
 
 export const useForm = () => {
     const form = document.querySelector('.form');
@@ -10,6 +10,6 @@ export const useForm = () => {
     }
 
     useSelectWidth(form);
-    // useFormFill(form);
     useIndustryField(form);
+    setFormApiSelector(form);
 };
